@@ -1,10 +1,10 @@
 import re
 import regex
-from base_serializer import BaseSerializer
-from dict_serializer import DictSerializer
+from serializers.base_serializer import BaseSerializer
+from serializers.dict_serializer import DictSerializer
 
 
-from constants import nonetype
+from serializers.constants import nonetype
 
 
 class JsonSerializer(BaseSerializer):
