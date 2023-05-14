@@ -217,7 +217,7 @@ class DictSerializer:
 
                 # If there are suitable global variables, they are replaced.
                 for key in gvars:
-                    if key in code.co_name and key in globals():  # возвращает словарь глобальных переменных текущщей области
+                    if key in code.co_name and key in globals():  # возвращает словарь глобальных переменных текущей области
                         gvars[key] = globals()[key]
 
                 func = functype(code, gvars, name, defaults, closure)  # создает функцию
@@ -259,4 +259,3 @@ class DictSerializer:
                 o.__dict__ = dct
 
                 return o
-            
