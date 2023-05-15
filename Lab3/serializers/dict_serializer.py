@@ -31,8 +31,8 @@ class DictSerializer:
             return [cls.to_dict(o) for o in obj]
 
         if type(obj) is dict:
-            # Since the key in the dictionary can be a hashable object, which will be represented as a non-hashable
-            # dictionary, it is easier to represent the dictionary as a list of key-value pairs
+            # Поскольку ключ в словаре может быть объектом хэш-таблицы, который будет представлен как нехэшируемый
+            # словарь, проще представить словарь в виде списка пар ключ-значение
             return {cls.TYPE_KW: dict.__name__,
                     cls.SOURCE_KW: [[cls.to_dict(item[0]), cls.to_dict(item[1])] for item in obj.items()]}
 
@@ -78,13 +78,13 @@ class DictSerializer:
             gvars = cls.__get_gvars(obj, is_inner_func)
             source[cls.GLOBALS_KW] = cls.to_dict(gvars)
 
-            # Name
+            # имя
             source[cls.NAME_KW] = cls.to_dict(obj.__name__)
 
-            # Defaults
+            # аргументы по умолчанию
             source[cls.DEFAULTS_KW] = cls.to_dict(obj.__defaults__)  # кортеж значений по умолчанию аргументов функции
 
-            # Closure
+            # замыкание
             source[cls.CLOSURE_KW] = cls.to_dict(obj.__closure__)    # кортеж переменных из внешней области видимости, используемых в замыкании
 
             return {cls.TYPE_KW: functype.__name__,
@@ -93,13 +93,13 @@ class DictSerializer:
         elif inspect.isclass(obj):
             source = {}
 
-            # Name
+            # имя
             source[cls.NAME_KW] = cls.to_dict(obj.__name__)
 
-            # Bases
+            # базовые классы
             source[cls.BASES_KW] = cls.to_dict(tuple(b for b in obj.__bases__ if b != object))  # кортеж базовых классов, от которых данный класс наследуется
 
-            # Dict
+            # словарь
             source[cls.DICT_KW] = cls.__get_obj_dict(obj)
 
             return {cls.TYPE_KW: type.__name__,
@@ -108,10 +108,10 @@ class DictSerializer:
         else:
             source = {}
 
-            # Class
+            # класс
             source[cls.CLASS_KW] = cls.to_dict(obj.__class__)
 
-            # Dict
+            # словарь
             source[cls.DICT_KW] = cls.__get_obj_dict(obj)
 
             return {cls.TYPE_KW: cls.OBJECT_KW,
@@ -123,24 +123,24 @@ class DictSerializer:
         gvars = {}
 
         for gvar_name in func.__code__.co_names:    # кортеж имен всех переменных, используемых в функции или методе
-            # Separating the variables that the function needs
+            # разделение переменных которые нужны функции
             if gvar_name in func.__globals__:
 
-                # Module
+                # модуль
                 if type(func.__globals__[gvar_name]) is moduletype:
                     gvars[gvar_name] = func.__globals__[gvar_name]
 
-                # Class
+                # класс
                 elif inspect.isclass(func.__globals__[gvar_name]):
-                    # To prevent recursion, the class in which this method is declared is replaced with the
-                    # name of the class. In the future, this name will be replaced by the class type
+                    # Чтобы предотвратить рекурсию, класс, в котором объявлен этот метод, заменяется на имя класса.
+                    # В будущем это имя будет заменено типом класса
                     c = func.__globals__[gvar_name]   # значение глобальной переменной
                     if is_inner_func and name in c.__dict__ and func == c.__dict__[name].__func__:
                         gvars[gvar_name] = c.__name__
                     else:
                         gvars[gvar_name] = c
 
-                # Recursion protection
+                # защита от рекурсии
                 elif gvar_name == func.__code__.co_name:
                     gvars[gvar_name] = func.__name__
 
@@ -157,7 +157,7 @@ class DictSerializer:
         for key, value in dct.items():
             if type(value) not in UNIQUE_TYPES:
                 if inspect.isroutine(value):
-                    # Recursion protection
+                    # защита от рекурсии
                     dct2[cls.to_dict(key)] = cls.to_dict(value, is_inner_func=True)
                 else:
                     dct2[cls.to_dict(key)] = cls.to_dict(value)
@@ -183,8 +183,8 @@ class DictSerializer:
             if obj_type == dict.__name__:
                 return cls.from_dict(obj_source, is_dict=True)
 
-            # Key - type name, value - type itself. Calling by type name returns that type.
-            # This is necessary for the same creation of simple collections.
+            # Ключ - имя типа, значение - сам тип. Вызов по имени типа возвращает этот тип.
+            # Это необходимо для того же создания простых коллекций.
             cols_dict = {t.__name__: t for t in [set, frozenset, tuple, bytes, bytearray]}
             if obj_type in cols_dict:
                 return cols_dict[obj_type](cls.from_dict(obj_source))
@@ -215,7 +215,7 @@ class DictSerializer:
                 defaults = cls.from_dict(obj_source[cls.DEFAULTS_KW])
                 closure = cls.from_dict(obj_source[cls.CLOSURE_KW])
 
-                # If there are suitable global variables, they are replaced.
+                # Если есть подходящие глобальные переменные, они заменяются.
                 for key in gvars:
                     if key in code.co_name and key in globals():  # возвращает словарь глобальных переменных текущей области
                         gvars[key] = globals()[key]
@@ -236,7 +236,7 @@ class DictSerializer:
 
                 cl = type(name, bases, dct)
 
-                # Restore a reference to the current class in the nested method __globals__
+                # Восстановите ссылку на текущий класс во вложенном методе __globals__
                 for attr in cl.__dict__.values():
                     if inspect.isroutine(attr):
                         if type(attr) in (smethodtype, classmethod):
