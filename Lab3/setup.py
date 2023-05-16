@@ -2,7 +2,7 @@ from setuptools import setup
 
 
 setup(
-    name="XMLAndJSONSerializer",
+    name="Serializer-XML-And-JSON-Uladzislau",
     version="0.1.0",
     description="Library for class and function serialization",
     author="Uladzislau",
@@ -12,7 +12,6 @@ setup(
         "Programming Language :: Python :: 3.10",
         "Operating System :: OS Independent"
     ],
-    packages=["serializers", "tests"],
-    include_package_data=True,
-    install_requires=["regex"]
+    packages=["serializers.src"],
+    include_package_data=True
 )
