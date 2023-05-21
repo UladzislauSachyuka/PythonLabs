@@ -5,6 +5,7 @@
 import math
 from serializers.src import factory
 
+from Serializators.Factory import SerializerFactory
 
 def my_decor(meth):
     def inner(*args, **kwargs):
@@ -49,10 +50,23 @@ class B:
 class C(A, B):
     pass
 
+def MyGen(x):
+    while x:
+
+        x -= 1
+
+def Gen(x):
+    if x == 0:
+        return 0
+    if x == 1:
+        return 0
+    return Gen(x - 1) + Gen(x - 2)
 
 # ser = factory.create_serializer('json')
 # ser = factory.SerializersFactory.create_serializer(factory.SerializerType.XML)
-ser = factory.Factory.create_serializer(factory.JSON_DATA_TYPE)
+# ser = factory.Factory.create_serializer(factory.JSON_DATA_TYPE)
+
+ser = SerializerFactory.get_serializer('json')
 
 # var = 15
 # var_ser = ser.dumps(var)
@@ -74,6 +88,18 @@ print(C_des.stat())
 print(c_des.class_meth())
 
 
+def f(a):
+    for _ in a:
+        yield _
+
+
+gen = f([1, 2, 3 , 4])
+print(next(gen))
+f_s = ser.dumps(gen)
+f_d = ser.loads(f_s)
+print(next(f_d))
+#lst = ()
+#print(Gen(2))
 
 # f = C(1, 2)
 # print(f.my_sin(11))

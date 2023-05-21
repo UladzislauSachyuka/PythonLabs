@@ -6,20 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="bc25369f-2db8-4d1a-88b1-7357be9afc17" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/serializers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/serializers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/serializers/base_serializer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/serializers/constants.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/serializers/dict_serializer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/serializers/factory.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/serializers/json.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/serializers/xml.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/json_tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_constants.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/xml_tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/serializers/src/converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/serializers/src/converter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/serializers/src/supportive.py" beforeDir="false" afterPath="$PROJECT_DIR$/serializers/src/supportive.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,10 +40,10 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/uladzislau/PycharmProjects/SCoCS_labs-lab3&quot;
+    &quot;last_opened_file_path&quot;: &quot;/home/uladzislau/PythonLabs/Lab3&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.cli">
     <configuration name="cli" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Lab3" />
       <option name="INTERPRETER_OPTIONS" value="" />
